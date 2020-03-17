@@ -22,6 +22,7 @@ public class Subject : MonoBehaviour
 
     }
 
+
     public IEnumerator MovingToTheScreen(string str)
     {
         _text.text = str;
@@ -51,10 +52,40 @@ public class Subject : MonoBehaviour
 
     }
 
+    public IEnumerator FadeText()
+    {
+        var Seq = DOTween.Sequence();
+
+        Seq.Append(_imageChild.DOFade(0.0f, duration));
+        Seq.Join(_text.DOFade(0.0f, duration));
+
+        yield return Seq.WaitForCompletion(true);
+    }
+
+    public IEnumerator ChangeText(string str)
+    {
+        _text.text = str;
+        var Seq = DOTween.Sequence();
+
+        Seq.Join(_imageChild.DOFade(1.0f, duration));
+        Seq.Join(_text.DOFade(1.0f, duration));
+        Seq.WaitForCompletion();
+
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+    }
+
     public IEnumerator Step(string str)
     {
         yield return StartCoroutine(MovingToTheScreen(str));
         yield return StartCoroutine(MovingOffTheScreen());
+        yield break;
+    }
+
+    public IEnumerator TextStep(string str)
+    {
+        yield return StartCoroutine(FadeText());
+        yield return StartCoroutine(ChangeText(str));
         yield break;
     }
 }
