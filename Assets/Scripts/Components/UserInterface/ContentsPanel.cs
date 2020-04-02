@@ -10,6 +10,14 @@ public class ContentsPanel : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void OnChapter2ButtonClick()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void OnChapter3ButtonClick()
+    {
+        SceneManager.LoadScene(3);
+    }
 
     public void OnBackButtonClick()
     {

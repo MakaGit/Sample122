@@ -8,4 +8,18 @@ public class ChapterCompletePanel : MonoBehaviour
         SceneManager.LoadScene(0);
         //UserInterfaceManager.Instance.EnablePanel(UIPanelType.MainMenuPanel);
     }
+
+    public void OnNextChapterButtonClick()
+    {
+        int sceneId = SceneManager.GetActiveScene().buildIndex;
+        if (sceneId <= 2)
+        {
+            SceneManager.LoadScene(++sceneId);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+        //UserInterfaceManager.Instance.EnablePanel(UIPanelType.MainMenuPanel);
+    }
 }

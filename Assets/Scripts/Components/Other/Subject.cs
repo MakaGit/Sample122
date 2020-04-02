@@ -22,6 +22,15 @@ public class Subject : MonoBehaviour
 
     }
 
+    public IEnumerator EmptyMovingToTheScreen()
+    {
+        var Seq = DOTween.Sequence();
+
+        Seq.Append(transform.DOLocalMoveX(endPosition.x, duration, false));
+        Seq.Join(_image.DOFade(1.0f, duration));
+        yield return Seq.WaitForCompletion();
+
+    }
 
     public IEnumerator MovingToTheScreen(string str)
     {
