@@ -1,6 +1,6 @@
 VAR number_of_blue_answers = 0
 VAR number_of_red_answers = 0
-VAR green_flag = false
+VAR answer_flag = 0
 
 ->Chapter5
 == Chapter5 ==
@@ -42,7 +42,7 @@ VAR green_flag = false
     
 === ChoiseNode ===    
 Отлично! Теперь время результатов! #mainSub
-- {green_flag:
+{answer_flag > 0:
     А может лучше мы тебя проспрашиваем наконец? #leftSub
     О чем, например? #mainSub
     Мы ничего толком не понимаем. Ни что здесь происходит, ни кто мы такие, ничего вообще. #leftSub
@@ -53,15 +53,14 @@ VAR green_flag = false
     Слишком долгая выйдет история. А нам несколько раз еще прокручивать этот диалог. #mainSub
     И вы все равно забудете. #mainSub
     ->Chapter5end
-    }
+}    
  {number_of_red_answers > number_of_blue_answers:
     Мне кажется, вы даже не старались пройти этот тест. Ну и ладно. #mainSub
     ->Chapter5end
-    
 - else:
     У нас тест пройден. Ура! Сейчас обнулим вам память и пройдем по новой. #mainSub
     ->Chapter5end
-    }
+}
 
 === Chapter5end ===
 Как бы то ни было, на сегодня закончим. Отличная была разминка! #mainSub

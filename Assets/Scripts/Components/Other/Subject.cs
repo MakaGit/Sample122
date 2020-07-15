@@ -8,6 +8,7 @@ public class Subject : MonoBehaviour
 {   
     [SerializeField] public float duration = 1.0f;
     [SerializeField] private TMP_Text _text;
+    [SerializeField] private TMP_Text _textName;
     [SerializeField] private Image _imageChild;
     private Image _image;
     public Vector3 endPosition;
@@ -18,6 +19,7 @@ public class Subject : MonoBehaviour
         _image = GetComponent<Image>();
         _image.DOFade(0.0f, 0.0f);
         _text.DOFade(0.0f, 0.0f);
+        _textName.DOFade(0.0f, 0.0f);
         _imageChild.DOFade(0.0f, 0.0f);
 
     }
@@ -41,9 +43,9 @@ public class Subject : MonoBehaviour
         Seq.Join(_image.DOFade(1.0f, duration));
         Seq.Join(_imageChild.DOFade(1.0f, duration));
         Seq.Join(_text.DOFade(1.0f, duration));
-        Seq.WaitForCompletion();
+        Seq.Join(_textName.DOFade(1.0f, duration));
 
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        yield return Seq.WaitForCompletion();
 
     }
 
@@ -55,7 +57,8 @@ public class Subject : MonoBehaviour
         Seq.Join(_image.DOFade(0.0f, duration));
         Seq.Join(_imageChild.DOFade(0.0f, duration));
         Seq.Join(_text.DOFade(0.0f, duration));
-        
+        Seq.Join(_textName.DOFade(0.0f, duration));
+
 
         yield return  Seq.WaitForCompletion(true);
 
@@ -67,6 +70,7 @@ public class Subject : MonoBehaviour
 
         Seq.Append(_imageChild.DOFade(0.0f, duration));
         Seq.Join(_text.DOFade(0.0f, duration));
+        Seq.Join(_textName.DOFade(0.0f, duration));
 
         yield return Seq.WaitForCompletion(true);
     }
@@ -78,9 +82,8 @@ public class Subject : MonoBehaviour
 
         Seq.Join(_imageChild.DOFade(1.0f, duration));
         Seq.Join(_text.DOFade(1.0f, duration));
-        Seq.WaitForCompletion();
-
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        Seq.Join(_textName.DOFade(1.0f, duration));
+        yield return Seq.WaitForCompletion();
 
     }
 
@@ -96,5 +99,14 @@ public class Subject : MonoBehaviour
         yield return StartCoroutine(FadeText());
         yield return StartCoroutine(ChangeText(str));
         yield break;
+    }
+    public void ChangeCharacter(int index)
+    {
+        _image.sprite = SettingsManager.Instance.Characters[index];
+    }
+    
+    public void ChangeName(string name)
+    {
+        _textName.text = name + ":";
     }
 }

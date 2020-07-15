@@ -1,5 +1,6 @@
 VAR number_of_blue_answers = 0
 VAR number_of_red_answers = 0
+VAR answer_flag = 0
 
 ->Chapter4
 == Chapter4 ==
@@ -13,7 +14,7 @@ VAR number_of_red_answers = 0
 ->Question1
 
 === Question1 ===
--Сколько здесь находится человек? #mainSub
+Сколько здесь находится человек? #mainSub
 * [Эм… Трое?]
     ~number_of_blue_answers++
     Верно! #mainSub
@@ -26,7 +27,7 @@ VAR number_of_red_answers = 0
     ->Question2
 
 === Question2 ===
--Вопрос второй! Какого цвета небо? #mainSub
+Вопрос второй! Какого цвета небо? #mainSub
 * [ Голубое.]
     ~number_of_blue_answers++
     Верно. Хотя тут скорее синее... #mainSub
@@ -81,6 +82,7 @@ VAR number_of_red_answers = 0
     ->Question5
     
 * [Что будет, если мы не пройдем тест?]
+    ~answer_flag++
     В конце пятой главы будет кусок контента, который предназначен для такого случая. #mainSub
     Ой, или ты боишься? #mainSub
     Не стоит. С вами ничего плохого не сделают. Сейчас мы просто репетируем перед большой постановкой. #mainSub

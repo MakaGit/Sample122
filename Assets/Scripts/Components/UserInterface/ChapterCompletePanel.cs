@@ -1,25 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChapterCompletePanel : MonoBehaviour
 {
+    [SerializeField] private Button NextCapterButton = null;
+
+    private int sceneId = 0;
     public void OnExitToMainMenuButtonClick()
     {
         SceneManager.LoadScene(0);
-        //UserInterfaceManager.Instance.EnablePanel(UIPanelType.MainMenuPanel);
     }
 
     public void OnNextChapterButtonClick()
     {
-        int sceneId = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneId);
+    }
+
+    private void OnEnable()
+    {
+        sceneId = SaveManager.Instance.GetCurrentScene();
+
         if (sceneId <= 2)
         {
-            SceneManager.LoadScene(++sceneId);
+            sceneId++;
         }
         else
         {
-            SceneManager.LoadScene(0);
+            NextCapterButton.interactable = false;
         }
-        //UserInterfaceManager.Instance.EnablePanel(UIPanelType.MainMenuPanel);
     }
 }
